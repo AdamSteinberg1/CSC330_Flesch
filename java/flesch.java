@@ -15,6 +15,7 @@ public class flesch {
     int numWords = words.size();
     int numSyllables = countTotalSyllables(words);
     int numSentences = countSentences(words);
+    int numDifficultWords = countDifficultWords(words);
 
 
     double alpha = ((double)numSyllables)/numWords;
@@ -23,7 +24,10 @@ public class flesch {
     int fleschIndex = (int)Math.round(206.835 - alpha * 84.6 - beta * 1.015);
 
     double fleschKinicaidIndex = alpha * 11.8 + beta * 0.39 - 15.59;
-    fleschKinicaidIndex = Math.round(fleschKinicaidIndex * 1000) / 1000.0; //round to one decimal place
+    fleschKinicaidIndex = Math.round(fleschKinicaidIndex * 10) / 10.0; //round to one decimal place
+
+
+
 
     System.out.println(fleschIndex);
     System.out.println(fleschKinicaidIndex);
@@ -109,7 +113,7 @@ public class flesch {
     if (numSyllables == 0)
       numSyllables = 1; //no word can have 0 syllables
 
-    System.out.println(word + " " + numSyllables); //debugging
+    //System.out.println(word + " " + numSyllables); //debugging TODO remove
     return numSyllables;
   }
 
@@ -160,5 +164,37 @@ public class flesch {
             default:
               return false;
     }
+  }
+
+  private static Set<String> getDifficultWords()
+  {
+    Set<String> difficultWords = new HashSet<String>();
+    try
+    {
+      Scanner scan = new Scanner(new File("/pub/pounds/CSC330/dalechall/wordlist1995.txt"));
+      while (scan.hasNext())
+      {
+        difficultWords.add(scan.next());
+      }
+      scan.close();
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("Error: Could not find list of difficult words for Dale-Chall.");
+      System.exit(1);
+    }
+    return difficultWords;
+  }
+
+  private static int countDifficultWords(ArrayList<String> words)
+  {
+    Set<String> difficultWords = getDifficultWords();
+    int count = 0;
+    for(String word : words)
+    {
+      if(difficultWords.contains(word))
+        count++;
+    }
+    return count;
   }
 }
