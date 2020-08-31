@@ -17,20 +17,29 @@ public class flesch {
     int numSentences = countSentences(words);
     int numDifficultWords = countDifficultWords(words);
 
-
-    double alpha = ((double)numSyllables)/numWords;
-    double beta = ((double)numWords)/numSentences;
+    //Calculate Flesch Readability Index
+    double alpha = (double) numSyllables / numWords;
+    double beta = (double) numWords / numSentences;
 
     int fleschIndex = (int)Math.round(206.835 - alpha * 84.6 - beta * 1.015);
 
+    //Calculate Flesch-Kinchaid Grade Level Index
     double fleschKinicaidIndex = alpha * 11.8 + beta * 0.39 - 15.59;
-    fleschKinicaidIndex = Math.round(fleschKinicaidIndex * 10) / 10.0; //round to one decimal place
+    fleschKinicaidIndex = Math.round(fleschKinicaidIndex * 10) / 10.0; //round to one decimal point
+
+    //Calculate Dale-Chall Readability Score
+    alpha = (double) numDifficultWords / numWords;
+    double dalechall = alpha * 100 * 0.1579 + beta * 0.0496;
+    if (alpha > 0.05)
+      dalechall += 3.6365;
+    dalechall = Math.round(dalechall *10) / 10.0; //round to one decimal point
 
 
 
-
-    System.out.println(fleschIndex);
-    System.out.println(fleschKinicaidIndex);
+    System.out.println("alpha = " + alpha);
+    System.out.println("Flesch Readability Index = " + fleschIndex);
+    System.out.println("Flesch-Kinchaid Grade Level Index = " + fleschKinicaidIndex);
+    System.out.println("Dale-Chall Readability Score = " + dalechall);
 
   }
 
@@ -166,33 +175,33 @@ public class flesch {
     }
   }
 
-  private static Set<String> getDifficultWords()
+  private static Set<String> getEasyWords()
   {
-    Set<String> difficultWords = new HashSet<String>();
+    Set<String> easyWords = new HashSet<String>();
     try
     {
       Scanner scan = new Scanner(new File("/pub/pounds/CSC330/dalechall/wordlist1995.txt"));
       while (scan.hasNext())
       {
-        difficultWords.add(scan.next());
+        easyWords.add(scan.next());
       }
       scan.close();
     }
     catch (FileNotFoundException e)
     {
-      System.err.println("Error: Could not find list of difficult words for Dale-Chall.");
+      System.err.println("Error: Could not find list of easy words for Dale-Chall.");
       System.exit(1);
     }
-    return difficultWords;
+    return easyWords;
   }
 
   private static int countDifficultWords(ArrayList<String> words)
   {
-    Set<String> difficultWords = getDifficultWords();
+    Set<String> easyWords = getEasyWords();
     int count = 0;
     for(String word : words)
     {
-      if(difficultWords.contains(word))
+      if(!easyWords.contains(word))
         count++;
     }
     return count;
