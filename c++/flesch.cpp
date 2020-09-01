@@ -1,17 +1,13 @@
 
-// Simple C++ program to display "Hello World"
-
-// Header file for input output functions
 #include<iostream>
 
 using namespace std;
 
-// main function -
-// where the execution of program begins
-int main()
+int main(int argc, char *argv[])
 {
-    // prints hello world
-    cout<<"Hello World";
-
-    return 0;
+  if(argc != 2)
+  {
+    cout << "Error: There must be exactly one command line argument.\n";
+    exit(1);
+  }
 }
