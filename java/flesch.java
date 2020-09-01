@@ -34,9 +34,6 @@ public class flesch {
       dalechall += 3.6365;
     dalechall = Math.round(dalechall *10) / 10.0; //round to one decimal point
 
-
-
-    System.out.println("alpha = " + alpha);
     System.out.println("Flesch Readability Index = " + fleschIndex);
     System.out.println("Flesch-Kinchaid Grade Level Index = " + fleschKinicaidIndex);
     System.out.println("Dale-Chall Readability Score = " + dalechall);
@@ -201,7 +198,7 @@ public class flesch {
     int count = 0;
     for(String word : words)
     {
-      if(!easyWords.contains(word))
+      if(!easyWords.contains(word.toLowerCase()))
         count++;
     }
     return count;
