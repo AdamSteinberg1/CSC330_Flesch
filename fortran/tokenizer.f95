@@ -1,13 +1,13 @@
 program parse
 
-character, dimension(:), allocatable  :: long_string
+character(:), allocatable  :: long_string
 integer :: filesize
 character(:), allocatable :: line, outline, word
 
 
 interface
   subroutine read_file( string, filesize )
-    character, dimension(:), allocatable :: string
+    character(:), allocatable :: string
     integer :: filesize
   end subroutine read_file
 end interface
@@ -26,7 +26,7 @@ print *, "Read ", filesize, " characters."
 
 
 
-line = "A line of Text"
+line = "A line of text"
 print *, line
 print *, "The length of the string is ", len(line)
 
@@ -43,7 +43,7 @@ enddo
 end program parse
 
 subroutine read_file( string, filesize )
-character, dimension(:), allocatable :: string
+character(:), allocatable :: string
 integer :: counter
 integer :: filesize
 character (LEN=1) :: input
