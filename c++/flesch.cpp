@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 #include <fstream>
 
 using namespace std;
@@ -117,6 +118,56 @@ int countTotalSyllables(vector<string> words)
   return count;
 }
 
+int countSentences(vector<string> words)
+{
+  int count = 0;
+  for(string word: words)
+  {
+    char c = word.back(); //last character in word
+    switch(c)
+    {
+      case '.':
+      case ':':
+      case ';':
+      case '?':
+      case '!':
+        count++;
+    }
+  }
+  return count;
+}
+
+unordered_set<string> getEasyWords()
+{
+  unordered_set<string> easyWords;
+  ifstream file;
+  file.open("/pub/pounds/CSC330/dalechall/wordlist1995.txt");
+  if(!file.is_open())
+  {
+    cout << "Error: Could not open Dale-Chall word list.\n";
+    exit(1);
+  }
+
+  string word;
+  while(file >> word)
+  {
+    easyWords.insert(word);
+  }
+  return easyWords;
+}
+
+int countDifficultWords(vector<string> words)
+{
+  unordered_set<string> easyWords = getEasyWords();
+  int count = 0;
+  for(string word : words)
+  {
+    if(!easyWords.count(tolower(word))) //if the word is not an easy word
+      count++;
+  }
+  return count;
+}
+
 int main(int argc, char *argv[])
 {
   if(argc != 2)
@@ -128,7 +179,11 @@ int main(int argc, char *argv[])
   vector<string> words = getInput(argv[1]);
   int numWords = words.size();
   int numSyllables = countTotalSyllables(words);
+  int numSentences = countSentences(words);
+  int numDifficultWords = countDifficultWords(words);
 
   cout << "numWords = " << numWords << endl;
   cout << "numSyllables = " << numSyllables << endl;
+  cout << "numSentences = " << numSentences << endl;
+  cout << "numDifficultWords = " << numDifficultWords << endl;
 }
