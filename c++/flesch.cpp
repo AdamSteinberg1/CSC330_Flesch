@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_set>
 #include <fstream>
+#include <math.h>
 
 using namespace std;
 
@@ -156,6 +157,14 @@ unordered_set<string> getEasyWords()
   return easyWords;
 }
 
+string tolower(string word)
+{
+  string result = "";
+  for(char c : word)
+    result += tolower(c);
+  return result;
+}
+
 int countDifficultWords(vector<string> words)
 {
   unordered_set<string> easyWords = getEasyWords();
@@ -182,8 +191,32 @@ int main(int argc, char *argv[])
   int numSentences = countSentences(words);
   int numDifficultWords = countDifficultWords(words);
 
+  //for debugging
+  /*
   cout << "numWords = " << numWords << endl;
   cout << "numSyllables = " << numSyllables << endl;
   cout << "numSentences = " << numSentences << endl;
   cout << "numDifficultWords = " << numDifficultWords << endl;
+  */
+
+  //Calculate Flesch Readability Index
+  double alpha = (double) numSyllables / numWords;
+  double beta = (double) numWords / numSentences;
+
+  int fleschIndex = (int)round(206.835 - alpha * 84.6 - beta * 1.015);
+
+  //Calculate Flesch-Kinchaid Grade Level Index
+  double fleschKinicaidIndex = alpha * 11.8 + beta * 0.39 - 15.59;
+  fleschKinicaidIndex = round(fleschKinicaidIndex * 10) / 10.0; //round to one decimal point
+
+  //Calculate Dale-Chall Readability Score
+  alpha = (double) numDifficultWords / numWords;
+  double dalechall = alpha * 100 * 0.1579 + beta * 0.0496;
+  if (alpha > 0.05)
+    dalechall += 3.6365;
+  dalechall = round(dalechall *10) / 10.0; //round to one decimal point
+
+  cout << "Flesch Readability Index = " << fleschIndex << endl;
+  cout << "Flesch-Kinchaid Grade Level Index = " << fleschKinicaidIndex << endl;
+  cout << "Dale-Chall Readability Score = " << dalechall << endl;
 }
