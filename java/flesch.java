@@ -17,6 +17,12 @@ public class flesch {
     int numSentences = countSentences(words);
     int numDifficultWords = countDifficultWords(words);
 
+    //for debugging
+    System.out.println("numWords = " + numWords);
+    System.out.println("numSyllables = " + numSyllables);
+    System.out.println("numSentences = " + numSentences);
+    System.out.println("numDifficultWords = " + numDifficultWords);
+
     //Calculate Flesch Readability Index
     double alpha = (double) numSyllables / numWords;
     double beta = (double) numWords / numSentences;
