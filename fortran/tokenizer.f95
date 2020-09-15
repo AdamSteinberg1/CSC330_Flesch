@@ -51,7 +51,7 @@ character (LEN=1) :: input
 inquire (file="/pub/pounds/CSC330/translations/KJV.txt", size=filesize)
 open (unit=5,status="old",access="direct",form="unformatted",recl=1,&
         file="/pub/pounds/CSC330/translations/KJV.txt")
-allocate( string(filesize) )
+!allocate( string(filesize) )
 
 counter=1
 100 read (5,rec=counter,err=200) input
