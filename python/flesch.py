@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import sys
 
 def isWord(word):
     for c in word:
@@ -7,13 +8,17 @@ def isWord(word):
     return False
 
 def getInput():
-    words = []
-    with open("/pub/pounds/CSC330/translations/" + sys.argv[1],'r') as file:
-        for line in file:
-            for token in line.split():
-                if isWord(token):
-                    words.append(token)
-    return words
+    try:
+        words = []
+        with open("/pub/pounds/CSC330/translations/" + sys.argv[1],'r') as file:
+            for line in file:
+                for token in line.split():
+                    if isWord(token):
+                        words.append(token)
+        return words
+    except (FileNotFoundError):
+        print("Error: Specified file does not exist.")
+        sys.exit()
 
 
 def countSyllablesRecursive(word):
@@ -40,6 +45,7 @@ def countSyllablesRecursive(word):
                 firstConsonant += 1
 
         return 1 + countSyllablesRecursive(word[firstConsonant:])
+
     else:
         return countSyllablesRecursive(word[1:]) #count the syllables in all the characters except the first
 
@@ -73,7 +79,26 @@ def countSentences(words):
             count += 1
     return count
 
-import sys
+def getEasyWords():
+    try:
+        easyWords = set()
+        with open('/pub/pounds/CSC330/dalechall/wordlist1995.txt','r') as file:
+            for line in file:
+                for token in line.split():
+                    easyWords.add(token)
+        return easyWords;
+    except (FileNotFoundError):
+        print("Error: Dale Chall word list file does not exist.")
+        sys.exit()
+
+def countDifficultWords(words):
+    easyWords = getEasyWords()
+    count = 0
+    for word in words:
+      if word.lower() not in easyWords:
+        count += 1
+    return count
+
 if len(sys.argv) != 2:
       print("Error: There must be exactly one command line argument.")
       sys.exit()
@@ -82,8 +107,30 @@ words = getInput()
 numWords = len(words)
 numSyllables = countTotalSyllables(words)
 numSentences = countSentences(words)
+numDifficultWords = countDifficultWords(words)
 
-
+#for debugging TODO remove
 print("numWords = ", numWords)
 print("numSyllables = ", numSyllables)
 print("numSentences = ", numSentences)
+print("numDifficultWords = ", numDifficultWords)
+
+#Calculate Flesch Readability Index
+alpha = numSyllables / numWords;
+beta = numWords / numSentences;
+
+fleschIndex = round(206.835 - alpha * 84.6 - beta * 1.015)
+
+#Calculate Flesch-Kinchaid Grade Level Index
+fleschKinicaidIndex = round(alpha * 11.8 + beta * 0.39 - 15.59, 1)
+
+#Calculate Dale-Chall Readability Score
+alpha = numDifficultWords / numWords;
+dalechall = alpha * 100 * 0.1579 + beta * 0.0496;
+if alpha > 0.05:
+    dalechall += 3.6365
+dalechall = round(dalechall, 1) #round to one decimal point
+
+print("Flesch Readability Index = ", fleschIndex);
+print("Flesch-Kinchaid Grade Level Index = ", fleschKinicaidIndex);
+print("Dale-Chall Readability Score = ", dalechall);
