@@ -1,12 +1,11 @@
 program parse
 
-character(:), allocatable  :: long_string
 integer :: filesize
 character(:), allocatable :: line, outline, word
 
 
 interface
-  subroutine read_file( string, filesize )
+  subroutine read_file( string )
     character(:), allocatable :: string
     integer :: filesize
   end subroutine read_file
@@ -19,15 +18,10 @@ interface
  end subroutine get_next_token
 end interface
 
-call read_file( long_string, filesize )
-print *, long_string
-print *, "Read ", filesize, " characters."
-
-
-
-
-line = "A line of text"
+call read_file(line)
 print *, line
+
+
 print *, "The length of the string is ", len(line)
 
 ! Initialize outline to be same string as line, it will get overwritten in
@@ -42,20 +36,18 @@ enddo
 
 end program parse
 
-subroutine read_file( string, filesize )
+subroutine read_file( string )
 character(:), allocatable :: string
 integer :: counter
-integer :: filesize
 character (LEN=1) :: input
 
-inquire (file="/pub/pounds/CSC330/translations/KJV.txt", size=filesize)
-open (unit=5,status="old",access="direct",form="unformatted",recl=1,&
-        file="/pub/pounds/CSC330/translations/KJV.txt")
-!allocate( string(filesize) )
+open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="/pub/pounds/CSC330/translations/KJV.txt") !this does not work
+!open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="test.txt") !this works
 
+string = ""
 counter=1
 100 read (5,rec=counter,err=200) input
-    string(counter:counter) = input
+    string = string // input
     counter=counter+1
     goto 100
 200 continue
