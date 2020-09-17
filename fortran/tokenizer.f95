@@ -41,8 +41,8 @@ character(:), allocatable :: string
 integer :: counter
 character (LEN=1) :: input
 
-open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="/pub/pounds/CSC330/translations/KJV.txt") !this does not work
-!open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="test.txt") !this works
+!open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="/pub/pounds/CSC330/translations/KJV.txt") !this does not work
+open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="test.txt") !this works
 
 string = ""
 counter=1
