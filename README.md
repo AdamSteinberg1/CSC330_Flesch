@@ -20,3 +20,8 @@ Python:
 ```
 flesch.py KJV.txt
 ```
+Fortran:
+```
+gfortran flesch.f95
+a.out KJV.txt
+```
