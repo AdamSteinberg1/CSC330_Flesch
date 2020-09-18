@@ -56,7 +56,6 @@ contains
 				call exit()
 		end if
 		open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="/pub/pounds/CSC330/translations/" // cla)
-		!open (unit=5,status="old",access="direct",form="unformatted",recl=1,file="test.txt") !TODO remove
 
 		word = ""
 		counter=1
@@ -134,19 +133,6 @@ contains
 
 		word = to_lower(stripWord(inword))
 
-!		do index = 1, 3000
-!			if (word == to_lower(trim(DaleChall(index)))) then
-!				out = 0
-!				return
-!			end if
-!		end do
-
-		!do a binary search for the word in the Dale Chall word list
-	!	print *, "looking for ", word
-
-
-!	if(word /= "were") return
-
 		l = 0
 		r = size(DaleChall) - 1
 		do while (l <= r)
@@ -161,14 +147,10 @@ contains
 
 				! If greater, ignore left half
 			  if (item < word) then
-		!			  print *, item, " < ", word
-		!				print *, "l: ", l, " -> ", m+1
 						l = m + 1
 
 				! If smaller, ignore right half
 				else
-	!					print *, item, " > ", word
-	!					print *, "r: ", r, " -> ", m-1
 						r = m - 1
 				end if
 		end do
@@ -176,7 +158,6 @@ contains
 		! if we reach here, then element was not present
 		out = 1
 
-	!	print *, "could not find ", word
 
 	end function isDifficult
 
