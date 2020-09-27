@@ -108,18 +108,7 @@ public class flesch {
 
   private static int countSyllables(String word)
   {
-    //remove punctuation from beginning
-    if(!Character.isLetter(word.charAt(0)))
-    {
-      word = word.substring(1);
-    }
-    //remove punctuation from end
-    int lastIndex = word.length()-1;
-    if(!Character.isLetter(word.charAt(lastIndex)))
-    {
-      word = word.substring(0, lastIndex);
-    }
-
+    word = stripWord(word);
     int numSyllables = countSyllablesRecursive(word);
 
     if (numSyllables == 0)
@@ -186,7 +175,7 @@ public class flesch {
       Scanner scan = new Scanner(new File("/pub/pounds/CSC330/dalechall/wordlist1995.txt"));
       while (scan.hasNext())
       {
-        easyWords.add(scan.next());
+        easyWords.add(scan.next().toLowerCase());
       }
       scan.close();
     }
@@ -204,9 +193,25 @@ public class flesch {
     int count = 0;
     for(String word : words)
     {
-      if(!easyWords.contains(word.toLowerCase()))
+      if(!easyWords.contains(stripWord(word.toLowerCase())))
         count++;
     }
     return count;
+  }
+
+  private static String stripWord(String word)
+  {
+    //remove punctuation from beginning
+    if(!Character.isLetter(word.charAt(0)))
+    {
+      word = word.substring(1);
+    }
+    //remove punctuation from end
+    int lastIndex = word.length()-1;
+    if(!Character.isLetter(word.charAt(lastIndex)))
+    {
+      word = word.substring(0, lastIndex);
+    }
+    return word;
   }
 }
