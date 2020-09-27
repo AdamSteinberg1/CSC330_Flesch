@@ -25,3 +25,8 @@ Fortran:
 gfortran flesch.f95
 a.out KJV.txt
 ```
+
+Perl:  
+```
+flesch.pl KJV.txt
+```
