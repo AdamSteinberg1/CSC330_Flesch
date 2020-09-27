@@ -10,7 +10,7 @@ def isWord(word):
 def getInput():
     try:
         words = []
-        with open("/pub/pounds/CSC330/translations/" + sys.argv[1],'r') as file:
+        with open("/pub/pounds/CSC330/translations/" + sys.argv[1], encoding="utf8", errors='ignore') as file:
             for line in file:
                 for token in line.split():
                     if isWord(token):
@@ -19,6 +19,16 @@ def getInput():
     except (FileNotFoundError):
         print("Error: Specified file does not exist.")
         sys.exit()
+
+def stripWord(word):
+    if not word[0].isalpha():
+      word = word[1:]
+
+    #remove punctuation from end
+    if not word[-1].isalpha():
+      word = word[:-1]
+
+    return word
 
 
 def countSyllablesRecursive(word):
@@ -50,13 +60,7 @@ def countSyllablesRecursive(word):
         return countSyllablesRecursive(word[1:]) #count the syllables in all the characters except the first
 
 def countSyllables(word):
-    #remove punctuation from beginning
-    if not word[0].isalpha():
-      word = word[1:]
-
-    #remove punctuation from end
-    if not word[-1].isalpha():
-      word = word[:-1]
+    word = stripWord(word)
 
     numSyllables = countSyllablesRecursive(word)
 
@@ -85,7 +89,7 @@ def getEasyWords():
         with open('/pub/pounds/CSC330/dalechall/wordlist1995.txt','r') as file:
             for line in file:
                 for token in line.split():
-                    easyWords.add(token)
+                    easyWords.add(token.lower())
         return easyWords;
     except (FileNotFoundError):
         print("Error: Dale Chall word list file does not exist.")
@@ -95,7 +99,7 @@ def countDifficultWords(words):
     easyWords = getEasyWords()
     count = 0
     for word in words:
-      if word.lower() not in easyWords:
+      if stripWord(word.lower()) not in easyWords:
         count += 1
     return count
 
