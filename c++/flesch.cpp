@@ -87,9 +87,9 @@ int countSyllablesRecursive(string word)
   }
 }
 
-int countSyllables(string word)
+string stripWord(string word)
 {
-  //remove punctuation from beginning
+  //remove punctation from beginning
   if(!isalpha(word[0]))
   {
     word = word.substr(1);
@@ -100,6 +100,12 @@ int countSyllables(string word)
   {
     word = word.substr(0, lastIndex);
   }
+  return word;
+}
+
+int countSyllables(string word)
+{
+  word = stripWord(word);
 
   int numSyllables = countSyllablesRecursive(word);
 
@@ -138,6 +144,14 @@ int countSentences(vector<string> words)
   return count;
 }
 
+string tolower(string word)
+{
+  string result = "";
+  for(char c : word)
+    result += tolower(c);
+  return result;
+}
+
 unordered_set<string> getEasyWords()
 {
   unordered_set<string> easyWords;
@@ -152,18 +166,12 @@ unordered_set<string> getEasyWords()
   string word;
   while(file >> word)
   {
-    easyWords.insert(word);
+    easyWords.insert(tolower(word));
   }
   return easyWords;
 }
 
-string tolower(string word)
-{
-  string result = "";
-  for(char c : word)
-    result += tolower(c);
-  return result;
-}
+
 
 int countDifficultWords(vector<string> words)
 {
@@ -171,7 +179,7 @@ int countDifficultWords(vector<string> words)
   int count = 0;
   for(string word : words)
   {
-    if(!easyWords.count(tolower(word))) //if the word is not an easy word
+    if(!easyWords.count(stripWord(tolower(word)))) //if the word is not an easy word
       count++;
   }
   return count;
