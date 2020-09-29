@@ -114,10 +114,10 @@ numSentences = countSentences(words)
 numDifficultWords = countDifficultWords(words)
 
 #for debugging TODO remove
-print("numWords = ", numWords)
-print("numSyllables = ", numSyllables)
-print("numSentences = ", numSentences)
-print("numDifficultWords = ", numDifficultWords)
+print("numWords =", numWords)
+print("numSyllables =", numSyllables)
+print("numSentences =", numSentences)
+print("numDifficultWords =", numDifficultWords)
 
 #Calculate Flesch Readability Index
 alpha = numSyllables / numWords;
@@ -135,6 +135,6 @@ if alpha > 0.05:
     dalechall += 3.6365
 dalechall = round(dalechall, 1) #round to one decimal point
 
-print("Flesch Readability Index = ", fleschIndex);
-print("Flesch-Kinchaid Grade Level Index = ", fleschKinicaidIndex);
-print("Dale-Chall Readability Score = ", dalechall);
+print("Flesch Readability Index =", fleschIndex);
+print("Flesch-Kinchaid Grade Level Index =", fleschKinicaidIndex);
+print("Dale-Chall Readability Score =", dalechall);

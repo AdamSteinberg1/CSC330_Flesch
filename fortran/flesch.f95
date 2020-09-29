@@ -15,11 +15,11 @@ program flesch
 	alpha = real(numSyllables) / numWords
 	beta = real(numWords) / numSentences
 
-	fleschIndex = nint(206.835 - alpha * 84.6 - beta * 1.015)
+	fleschIndex = 206.835 - alpha * 84.6 - beta * 1.015
 
   !Calculate Flesch-Kinchaid Grade Level Index
 	fleschKinicaidIndex = alpha * 11.8 + beta * 0.39 - 15.59
-	fleschKinicaidIndex = nint(fleschKinicaidIndex * 10) / 10.0; !round to one decimal point
+	!fleschKinicaidIndex = nint(fleschKinicaidIndex * 10) / 10.0; !round to one decimal point
 
 	!Calculate Dale-Chall Readability Score
 
@@ -28,13 +28,14 @@ program flesch
   if (alpha > 0.05) then
     daleChallScore = daleChallScore + 3.6365
 	end if
-  daleChallScore = nint(daleChallScore * 10) / 10.0 !round to one decimal point
+  !daleChallScore = nint(daleChallScore * 10) / 10.0 !round to one decimal point
 
-	PRINT *,  "Flesch Readability Index = ", fleschIndex
-	PRINT 1000, " Flesch-Kinchaid Grade Level Index = ", fleschKinicaidIndex
+	PRINT 1100,  "Flesch Readability Index = ", fleschIndex
+	PRINT 1000, "Flesch-Kinchaid Grade Level Index = ", fleschKinicaidIndex
 
-	PRINT 1000, " Dale-Chall Readability Score = ", daleChallScore
-1000 format ( A,F4.1)
+	PRINT 1000, "Dale-Chall Readability Score = ", daleChallScore
+1000 format (A, F3.1)
+1100 format (A, I2)
 
 contains
 
