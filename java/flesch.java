@@ -54,7 +54,6 @@ public class flesch {
     ArrayList<String> words = new ArrayList<String>();
     try
     {
-      //Scanner scan = new Scanner(new File("/pub/pounds/CSC330/translations/" + filename));
       BufferedReader reader = new BufferedReader(new FileReader("/pub/pounds/CSC330/translations/" + filename));
       String line;
       while ((line = reader.readLine()) != null)
