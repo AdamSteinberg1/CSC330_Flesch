@@ -54,12 +54,11 @@ public class flesch {
     ArrayList<String> words = new ArrayList<String>();
     try
     {
-      Scanner scan = new Scanner(new File("/pub/pounds/CSC330/translations/" + filename));
-      int linesProcessed = 0;
-      while (scan.hasNextLine())
+      //Scanner scan = new Scanner(new File("/pub/pounds/CSC330/translations/" + filename));
+      BufferedReader reader = new BufferedReader(new FileReader("/pub/pounds/CSC330/translations/" + filename));
+      String line;
+      while ((line = reader.readLine()) != null)
       {
-        String line = scan.nextLine();
-        linesProcessed++;
         for(String token : line.split(" "))
         {
           if(isWord(token))
@@ -68,11 +67,9 @@ public class flesch {
           }
         }
       }
-      scan.close();
-      System.out.println("Last word processed is: " + words.get(words.size()-1));
-      System.out.println("Lines Processed: " + linesProcessed);
+      reader.close();
     }
-    catch (FileNotFoundException e)
+    catch (IOException e)
     {
       System.err.println("Error: Specified file does not exist.");
       System.exit(1);
