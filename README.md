@@ -1,8 +1,14 @@
 # flesch
 
-Project 1 for CSC 330  
+## Project 1 for CSC 330  
 
-Execution Commands  
+To run the Flesch program in all the languages, run the bash script by typing  
+```
+./runall.sh
+```
+This will print the results in a nice table.  
+
+#### Execution Commands for Individual Programs 
 (All execution commands use KJV.txt as the sample command line argument)  
 
 Java:  
