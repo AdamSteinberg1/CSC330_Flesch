@@ -29,9 +29,9 @@ public class flesch {
 
     int fleschIndex = (int)Math.round(206.835 - alpha * 84.6 - beta * 1.015);
 
-    //Calculate Flesch-Kinchaid Grade Level Index
-    double fleschKinicaidIndex = alpha * 11.8 + beta * 0.39 - 15.59;
-    fleschKinicaidIndex = Math.round(fleschKinicaidIndex * 10) / 10.0; //round to one decimal point
+    //Calculate Flesch-Kincaid Grade Level Index
+    double fleschKincaidIndex = alpha * 11.8 + beta * 0.39 - 15.59;
+    fleschKincaidIndex = Math.round(fleschKincaidIndex * 10) / 10.0; //round to one decimal point
 
     //Calculate Dale-Chall Readability Score
     alpha = (double) numDifficultWords / numWords;
@@ -41,7 +41,7 @@ public class flesch {
     dalechall = Math.round(dalechall *10) / 10.0; //round to one decimal point
 
     System.out.println("Flesch Readability Index = " + fleschIndex);
-    System.out.println("Flesch-Kinchaid Grade Level Index = " + fleschKinicaidIndex);
+    System.out.println("Flesch-Kincaid Grade Level Index = " + fleschKincaidIndex);
     System.out.println("Dale-Chall Readability Score = " + dalechall);
 
   }
@@ -55,13 +55,22 @@ public class flesch {
     try
     {
       Scanner scan = new Scanner(new File("/pub/pounds/CSC330/translations/" + filename));
-      while (scan.hasNext())
+      int linesProcessed = 0;
+      while (scan.hasNextLine())
       {
-        String token = scan.next();
-        if(isWord(token))
-          words.add(token);
+        String line = scan.nextLine();
+        linesProcessed++;
+        for(String token : line.split(" "))
+        {
+          if(isWord(token))
+          {
+            words.add(token);
+          }
+        }
       }
       scan.close();
+      System.out.println("Last word processed is: " + words.get(words.size()-1));
+      System.out.println("Lines Processed: " + linesProcessed);
     }
     catch (FileNotFoundException e)
     {

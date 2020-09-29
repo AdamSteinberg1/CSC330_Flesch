@@ -42,8 +42,8 @@ my $beta = $numWords / $numSentences;
 
 my $fleschIndex = 206.835 - $alpha * 84.6 - $beta * 1.015;
 
-#Calculate Flesch-Kinchaid Grade Level Index
-my $fleschKinicaidIndex = $alpha * 11.8 + $beta * 0.39 - 15.59;
+#Calculate Flesch-Kincaid Grade Level Index
+my $fleschKincaidIndex = $alpha * 11.8 + $beta * 0.39 - 15.59;
 #
 # #Calculate Dale-Chall Readability Score
 $alpha = $numDifficultWords / $numWords;
@@ -54,7 +54,7 @@ if ($alpha > 0.05)
 }
 
 printf("Flesch Readability Index = %.0f \n", $fleschIndex);
-printf("Flesch-Kinchaid Grade Level Index = %.1f \n", $fleschKinicaidIndex);
+printf("Flesch-Kincaid Grade Level Index = %.1f \n", $fleschKincaidIndex);
 printf("Dale-Chall Readability Score = %.1f \n", $dalechall);
 
 sub getEasyWords

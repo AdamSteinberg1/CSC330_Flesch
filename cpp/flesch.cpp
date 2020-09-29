@@ -214,17 +214,16 @@ int main(int argc, char *argv[])
   int fleschIndex = (int)round(206.835 - alpha * 84.6 - beta * 1.015);
 
   //Calculate Flesch-Kinchaid Grade Level Index
-  double fleschKinicaidIndex = alpha * 11.8 + beta * 0.39 - 15.59;
-  fleschKinicaidIndex = round(fleschKinicaidIndex * 10) / 10.0; //round to one decimal point
+  double fleschKincaidIndex = alpha * 11.8 + beta * 0.39 - 15.59;
 
   //Calculate Dale-Chall Readability Score
   alpha = (double) numDifficultWords / numWords;
   double dalechall = alpha * 100 * 0.1579 + beta * 0.0496;
   if (alpha > 0.05)
     dalechall += 3.6365;
-  dalechall = round(dalechall *10) / 10.0; //round to one decimal point
 
-  cout << "Flesch Readability Index = " << fleschIndex << endl;
-  cout << "Flesch-Kinchaid Grade Level Index = " << fleschKinicaidIndex << endl;
-  cout << "Dale-Chall Readability Score = " << dalechall << endl;
+
+  printf("Flesch Readability Index = %d\n", fleschIndex);
+  printf("Flesch-Kincaid Grade Level Index = %.1f\n", fleschKincaidIndex);
+  printf("Dale-Chall Readability Score = %.1f\n", dalechall);
 }

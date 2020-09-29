@@ -125,8 +125,8 @@ beta = numWords / numSentences;
 
 fleschIndex = round(206.835 - alpha * 84.6 - beta * 1.015)
 
-#Calculate Flesch-Kinchaid Grade Level Index
-fleschKinicaidIndex = round(alpha * 11.8 + beta * 0.39 - 15.59, 1)
+#Calculate Flesch-Kincaid Grade Level Index
+fleschKincaidIndex = round(alpha * 11.8 + beta * 0.39 - 15.59, 1)
 
 #Calculate Dale-Chall Readability Score
 alpha = numDifficultWords / numWords;
@@ -136,5 +136,5 @@ if alpha > 0.05:
 dalechall = round(dalechall, 1) #round to one decimal point
 
 print("Flesch Readability Index =", fleschIndex);
-print("Flesch-Kinchaid Grade Level Index =", fleschKinicaidIndex);
+print("Flesch-Kincaid Grade Level Index =", fleschKincaidIndex);
 print("Dale-Chall Readability Score =", dalechall);
