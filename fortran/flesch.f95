@@ -6,10 +6,11 @@ program flesch
 
 	call read_file( numWords, numSentences, numSyllables, numDifficultWords, DaleChall )
 
-	print *, "numWords = ", numWords
-	print *, "numSentences = ", numSentences
-	print *, "numSyllables = ", numSyllables
-	print *, "numDifficultWords = ", numDifficultWords
+  ! for debugging
+	! print *, "numWords = ", numWords
+	! print *, "numSentences = ", numSentences
+	! print *, "numSyllables = ", numSyllables
+	! print *, "numDifficultWords = ", numDifficultWords
 
   !Calculate Flesch Readability Index
 	alpha = real(numSyllables) / numWords

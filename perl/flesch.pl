@@ -29,10 +29,11 @@ my $numSentences = countSentences(@words);
 my $numSyllables = countTotalSyllables(@words);
 my $numDifficultWords = countDifficultWords(@words);
 
-print("numWords = $numWords\n");
-print("numSentences = $numSentences\n");
-print("numSyllables = $numSyllables\n");
-print("numDifficultWords = $numDifficultWords\n");
+# for debugging
+# print("numWords = $numWords\n");
+# print("numSentences = $numSentences\n");
+# print("numSyllables = $numSyllables\n");
+# print("numDifficultWords = $numDifficultWords\n");
 
 
 #Calculate Flesch Readability Index

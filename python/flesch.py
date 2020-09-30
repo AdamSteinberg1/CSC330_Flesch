@@ -113,11 +113,11 @@ numSyllables = countTotalSyllables(words)
 numSentences = countSentences(words)
 numDifficultWords = countDifficultWords(words)
 
-#for debugging TODO remove
-print("numWords =", numWords)
-print("numSyllables =", numSyllables)
-print("numSentences =", numSentences)
-print("numDifficultWords =", numDifficultWords)
+#for debugging
+# print("numWords =", numWords)
+# print("numSyllables =", numSyllables)
+# print("numSentences =", numSentences)
+# print("numDifficultWords =", numDifficultWords)
 
 #Calculate Flesch Readability Index
 alpha = numSyllables / numWords;
