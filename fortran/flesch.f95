@@ -38,6 +38,7 @@ program flesch
 
 contains
 
+	!reads in the file from the command line argument and processes each word
 	subroutine read_file( numWords, numSentences, numSyllables, numDifficultWords, DaleChall )
 		character(100) :: word
 		character(50) :: cla
@@ -78,6 +79,7 @@ contains
 		end if
 	end subroutine read_file
 
+	!gets all the words considered easy for the Dale Chall score
 	subroutine getDaleChall( DaleChall )
 		character(*), dimension(:), allocatable :: DaleChall
 		character(50), dimension(3000) :: words
@@ -110,7 +112,7 @@ contains
 
 	end subroutine getDaleChall
 
-
+	!counts all the metrics for this specific word
 	subroutine processWord(word, numWords, numSentences, numSyllables, numDifficultWords, DaleChall)
 		character(*) :: word
 		character(*), dimension(:) :: DaleChall
@@ -125,6 +127,8 @@ contains
 
 	end subroutine processWord
 
+	!Does a binary search on the dalechall word list
+	!if the word is not present then it is difficult
 	integer function isDifficult(inword, DaleChall) result(out)
 		character(*) :: inword
 		character(:), allocatable :: word, item
@@ -187,6 +191,7 @@ contains
 
 	end function countSyllables
 
+	!removes any nonalpabetic characters from the beginning and end of the word
 	function stripWord(inword) result(outword)
 		character(:), allocatable :: outword
 		character(*) :: inword
