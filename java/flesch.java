@@ -51,7 +51,6 @@ public class flesch {
   private static ArrayList<String> getInput(String filename)
   {
     //returns an ArrayList of all the words in the input text file
-    //all the valid filenames for the translations: ASV.txt  BBE.txt  DARBY.txt  DRB.txt  KJ21.txt  KJV.txt  NAB.txt  NASB.txt  NIV.txt  NKJV.txt  NLT.txt  WEB.txt  YLT.txt
 
     ArrayList<String> words = new ArrayList<String>();
     try
@@ -103,6 +102,7 @@ public class flesch {
     return count;
   }
 
+  //counts the syllables of all the words
   private static int countTotalSyllables(ArrayList<String> words)
   {
     int count = 0;
@@ -113,6 +113,7 @@ public class flesch {
     return count;
   }
 
+  //counts the syllables in one word
   private static int countSyllables(String word)
   {
     word = stripWord(word);
@@ -174,6 +175,7 @@ public class flesch {
     }
   }
 
+  //gets all the words that are considered easy for the Dale-Chall score calculation
   private static Set<String> getEasyWords()
   {
     Set<String> easyWords = new HashSet<String>();
@@ -206,6 +208,7 @@ public class flesch {
     return count;
   }
 
+  //removes punctuation from the beginning and end of the word
   private static String stripWord(String word)
   {
     //remove punctuation from beginning
