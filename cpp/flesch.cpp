@@ -18,6 +18,7 @@ bool isWord(string s)
   return false;
 }
 
+//reads in the file 
 vector<string> getInput(string filename)
 {
   vector<string> words;
@@ -103,6 +104,7 @@ string stripWord(string word)
   return word;
 }
 
+//counts the syllables in one word
 int countSyllables(string word)
 {
   word = stripWord(word);
@@ -115,6 +117,7 @@ int countSyllables(string word)
   return numSyllables;
 }
 
+//counts all the syllables in all the words
 int countTotalSyllables(vector<string> words)
 {
   int count = 0;
@@ -152,6 +155,7 @@ string tolower(string word)
   return result;
 }
 
+//get all the words that are considered easy for the purpose of the Dale-Chall score
 unordered_set<string> getEasyWords()
 {
   unordered_set<string> easyWords;
