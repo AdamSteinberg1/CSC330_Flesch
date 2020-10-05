@@ -13,7 +13,7 @@ my @all_lines = <DATA>;
 
 my @words = ();
 
-#Now take each line and break it into tokens based on spaces and print the token
+#Now take each line and break it into tokens based on spaces
 foreach my $line (@all_lines)
 {
    my @tokens = split(' ', $line);
