@@ -20,6 +20,7 @@ def getInput():
         print("Error: Specified file does not exist.")
         sys.exit()
 
+#remove punctuation from beginning and end
 def stripWord(word):
     if not word[0].isalpha():
       word = word[1:]
